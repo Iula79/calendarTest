@@ -1,6 +1,6 @@
 var express = require('express'),
     session = require('express-session'),
-    mogoose = require('mongoose'),
+    mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
     bcrypt = require('bcrypt'),
@@ -17,8 +17,21 @@ app.use(session({
   resave: false
 }));
 
-app.listen(3000, function () {
+var port = process.env.PORT || 3000
 
+app.listen(port, function () {
     console.log('server running on localhost 3000');
+});
 
+mongoose.connect('mongodb://localhost/MEANstack-app', function(err) {
+  if (err) {
+    console.log('connection error', err);
+  } else {
+    console.log('connection successful');
+  }
+});
+
+
+app.get('/', function(req, res) {
+  res.send('connected via server.js route');
 });
