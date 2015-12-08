@@ -3,8 +3,10 @@ var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
+    fs = require('fs'),
     bcrypt = require('bcrypt'),
     request = require('request'),
+    Todo = require('./models/todo.js'),
     app = express();
 
 app.use(logger('dev'));
@@ -35,3 +37,16 @@ mongoose.connect('mongodb://localhost/MEANstack-app', function(err) {
 app.get('/', function(req, res) {
   res.send('connected via server.js route');
 });
+
+app.get('/todos', function (req, res) {
+    Todo.find().exec(function (err, todos) {
+        res.send(todos);
+  });
+});
+
+// fs.readdirSync('./controllers/').forEach(function(file) {
+//   if (file.substr(-3) == '.js') {
+//     user = require('./controllers/' + file);
+//     user.controller(app);
+//   }
+// });

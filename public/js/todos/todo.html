@@ -1,0 +1,16 @@
+<nav class="tabs">
+    <a ui-sref-active="active" ui-sref="home">My List</a>
+    <a ui-sref-active="active" ui-sref="archive">Archives</a>
+</nav>
+<main>
+    <!-- begin add new todo -->
+    <form class="add-todo" ng-submit="todos.addTodo()">
+        <input class="text-box" type="text" placeholder="I need to..." ng-model="todos.text">
+        <input type="submit" class="btn btn-add" value="+">
+    </form>
+        <ul>
+            <li ng-repeat="todo in todos.all">
+                <todo name="{{todo.text}}"></todo>
+            </li>
+        </ul>
+</main>
