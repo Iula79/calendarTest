@@ -1,32 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app='meanApp'>
 
 <head>
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/angular-csp.css">
+    <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 
 
 </head>
 
 <body>
-    <h1>This is index</h1>
     <section id="signup" class="login">
     </section>
 
-    <section id="todo" ng-app='meanApp'>
-     <div class="wrapper" ng-controller="TodosCtrl" ui-view></div>
+    <section id="todo" ng-controller="TodosCtrl as todos">
+        <form class="add-todo" ng-submit="todos.addTodo()">
+            <!-- when I hit submit it runs the function add todo the model takes the value in the text box and assigns it to the key text in the newTodo object that I created previously -->
+            <input class="text-box" type="text" placeholder="I need to..." ng-model="todos.newTodo.text">
+            <input type="submit" class="btn btn-add" value="+">
+        </form>
+        <ul>
+            <li ng-repeat="todo in todos.all" >
+                <span editable-text="todo.text" e-form="textBtnForm" onaftersave="todos.editTodo(todo)">{{todo.text|| 'empty' }}</span>
+                <button class="btn btn-delete" ng-click="todos.deleteTodo(todo)">x</button>
+                <button class="btn btn-default" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+   edit
+ </button>
+            </li>
+        </ul>
     </section>
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="/lib/angular.js"></script>
     <script src="/lib/bootstrap.js"></script>
+    <script src="/lib/xeditable.js"></script>
     <script src="/js/app.js"></script>
-    <script src="/js/todos/todos_controller.js"></script>
-    <script src="/js/todos/todos_view.js"></script>
+    <script src="/js/controllers/todos_controller.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 
     </script>
