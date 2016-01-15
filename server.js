@@ -82,7 +82,6 @@ app.put('/todos/:id', function(req, res) {
      _id: req.params.id
    }, {
     text: req.body.text
-
  }, function(err, todo) {
      res.send(todo);
    });
