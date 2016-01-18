@@ -8,36 +8,45 @@ html {
 
 body {
     font-family: 'Bangers', cursive;
+
 }
 
 .container {
     /*font-family: 'Bangers', cursive;*/
     font-size: 20px;
 background-color: white;
-margin-left: 20%;
-margin-right: 20%;
-padding-left: 15%;
-padding-right: 15%;
+margin-left: 10%;
+margin-right: 40%;
+padding-left: 10%;
 padding-top: 15px;
 padding-bottom: 15px;
 border-radius: 100px;
-
+min-height: 200px;
 height: 50%;
 /*text-align: center;*/
+}
+h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 40px;
 }
 .del_button{
     font-family: 'Bangers', cursive;
     color: red;
     margin: 10px;
+    font-size: 15px;
 }
 .edit_button {
     font-family: 'Bangers', cursive;
     color: gray;
+    font-size: 15px;
 }
-.add_button {
-    /*font-family: 'Bangers', cursive;*/
+ .add_button {
+    font-family: 'Bangers', cursive;
+    font-size: 15px;
 }
 .text-box {
+    width: 160px;
     border-radius: 20px;
     line-height: 30px;
     border: 0px;
@@ -50,4 +59,16 @@ height: 50%;
     left: 25%;
     top: 75%;
     text-align: center;
+}
+button {
+    font-family: 'Bangers', cursive;
+}
+input {
+    width: 50px;
+    border-radius: 20px;
+    line-height: 10px;
+    border-color: gray;
+    padding-left: 10px;
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
 }
