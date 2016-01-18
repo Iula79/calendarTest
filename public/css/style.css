@@ -1,3 +1,53 @@
-.login {
-    display: none;
+html {
+    background: url("/images/Green-Parrots-Desktop-Wide-Wallpapers.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    font-family: 'Bangers', cursive;
+}
+
+.container {
+    /*font-family: 'Bangers', cursive;*/
+    font-size: 20px;
+background-color: white;
+margin-left: 20%;
+margin-right: 20%;
+padding-left: 15%;
+padding-right: 15%;
+padding-top: 15px;
+padding-bottom: 15px;
+border-radius: 100px;
+
+height: 50%;
+/*text-align: center;*/
+}
+.del_button{
+    font-family: 'Bangers', cursive;
+    color: red;
+    margin: 10px;
+}
+.edit_button {
+    font-family: 'Bangers', cursive;
+    color: gray;
+}
+.add_button {
+    /*font-family: 'Bangers', cursive;*/
+}
+.text-box {
+    border-radius: 20px;
+    line-height: 30px;
+    border: 0px;
+    padding-left: 10px;
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
+}
+.add_form {
+    position: absolute;
+    left: 25%;
+    top: 75%;
+    text-align: center;
 }
