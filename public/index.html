@@ -19,15 +19,19 @@
 
     <section id="todo" ng-controller="TodosCtrl as todos">
     <div class="container">
-        <h1>Have you done it?</h1>
+        <div class="" ng-if="todos.all.length">
+            <h1>Have you done it?</h1></div>
+            <div class="" ng-if="! todos.all.length">
+            <h3>Good Job!</h3></div>
         <ul>
             <li ng-repeat="todo in todos.all">
-                <span editable-text="todo.text" e-form="textBtnForm" onaftersave="todos.editTodo(todo)">{{todo.text|| 'empty' }}</span>
-                <button class="del_button" ng-click="todos.deleteTodo(todo)">x</button>
+                <span editable-text="todo.text" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="todos.editTodo(todo)">{{todo.text|| 'empty' }}</span>
+                <button class="del_button" ng-click="todos.deleteTodo(todo)" ng-hide="textBtnForm.$visible">x</button>
                 <button class="edit_button" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">edit</button>
             </li>
         </ul>
         </div>
+        <div class="comma"></div>
         <div class="add_form">
         <form class="add-todo" ng-submit="todos.addTodo()">
             <!-- when I hit submit it runs the function add todo the model takes the value in the text box and assigns it to the key text in the newTodo object that I created previously -->

@@ -15,6 +15,7 @@ body {
     /*font-family: 'Bangers', cursive;*/
     font-size: 20px;
 background-color: white;
+margin-top: 5%;
 margin-left: 10%;
 margin-right: 40%;
 padding-left: 10%;
@@ -22,6 +23,7 @@ padding-top: 15px;
 padding-bottom: 15px;
 border-radius: 100px;
 min-height: 200px;
+min-width: 300px;
 height: 50%;
 /*text-align: center;*/
 }
@@ -29,6 +31,9 @@ h1 {
     margin: 0px;
     padding: 0px;
     font-size: 40px;
+}
+h3 {
+    font-size: 80px;
 }
 .del_button{
     font-family: 'Bangers', cursive;
@@ -62,13 +67,30 @@ h1 {
 }
 button {
     font-family: 'Bangers', cursive;
+    color: gray;
+    margin: 10px;
 }
 input {
-    width: 50px;
+    width: auto;
     border-radius: 20px;
+    border: 0px;
     line-height: 10px;
-    border-color: gray;
     padding-left: 10px;
     font-size: 15px;
     font-family: 'Bangers', cursive;
+}
+/*.comma {
+    width: 5px;
+    height: 0;
+    border:20px solid transparent;
+    border-radius: 0px 0px 0px 20px;
+    border-left: 80px solid white;
+}*/
+.comma {
+    height:60px;
+    width:60px;
+    background: white;
+    border-radius: 0px 0px 0px 50px;
+    /*border-top: 20px solid white;*/
+    margin-left: 40%;
 }
