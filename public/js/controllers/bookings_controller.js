@@ -63,13 +63,13 @@ function bookingCtrl($http, $log) {
         self.newBooking = {};
     }
 
-    function editBooking(Booking) {
+    function editBooking(booking) {
         console.log("inedit")
-        console.log(booking.text)
+        console.log(booking)
         $http({
             method: 'PUT',
             url: '/book/bookings/' + booking._id,
-            data: Booking
+            data: booking
         }).then(function(res) {
             console.log(res)
             getBookings();
@@ -78,4 +78,5 @@ function bookingCtrl($http, $log) {
         });
 
     }
+    
 }

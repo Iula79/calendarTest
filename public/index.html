@@ -4,60 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
-    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/angular-csp.css">
-    <!-- <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="/css/style.css">
-
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/lib/xeditable.css" />
+    <link rel="stylesheet" href="/lib/jquery-ui.css" />
 </head>
 
 <body>
     <section id="booking" ng-controller="BookingCtrl as books">
+
         <div class="container">
-            <!-- <div class="" ng-if="todos.all.length">
-                <h1>Have you done it?</h1>
-            </div>
-            <div class="" ng-if="! todos.all.length">
-                <h3>Good Job!</h3>
-            </div> -->
-            <h1>Bookings</h1>
-            <ul>
-                <li ng-repeat="book in books.all">
-                    <span editable-text="book.firstName" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="books.editBooking(book)">{{book.firstName|| 'empty' }}</span>
-                    <span editable-text="book.lastName" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="books.editBooking(book)">{{book.lastName|| 'empty' }}</span>
-                    
-                    
-                    <button class="del_button" ng-click="books.deleteBook(book)" ng-hide="textBtnForm.$visible">x</button>
-                    <button class="edit_button" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">edit</button>
-                </li>
-            </ul>
-        </div>
-        <div class="comma"></div>
-        <div class="add_form">
-            <form class="add-todo" ng-submit="books.addBooking()">
+            <h1>Add Booking</h1>
+            <form class="myform" ng-submit="books.addBooking()">
                 <!-- when I hit submit it runs the function add todo the model takes the value in the text box and assigns it to the key text in the newTodo object that I created previously  -->
                 <label for="firstName">First Name:</label>
                 <input class="text-box" type="text" placeholder="" ng-model="books.newBooking.firstName" required>
                 <label for="lastName">Last Name:</label>
                 <input class="text-box" type="text" placeholder="" ng-model="books.newBooking.lastName" required>
                 <label for="email">Email:</label>
-                <input class="text-box" type="email" placeholder="johndoe@gmail.com" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" ng-model="books.newBooking.email">
+                <input class="text-box" type="email" placeholder="johndoe@gmail.com" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                    ng-model="books.newBooking.email">
                 <label for="telephone">Phone:</label>
                 <input class="text-box" type="text" placeholder="+00 000-000-0000" ng-model="books.newBooking.telephone">
                 <label for="guests">Guests:</label>
                 <input class="text-box" type="number" max="10" placeholder="0" ng-model="books.newBooking.guests" required>
                 <label for="arrivalDate">Arrival Date:</label>
-                <input type="date" id="arrivalDate" name="input" ng-model="books.newBooking.arrivalDate" placeholder="yyyy-MM-dd" min="2018-01-01" 
-                        required />
+                <input type="date" id="arrivalDate" name="input" ng-model="books.newBooking.arrivalDate" placeholder="yyyy-MM-dd" min="2018-01-01"
+                    required />
                 <label for="departureDate">Departure Date:</label>
-                <input type="date" id="departureDate" name="input" ng-model="books.newBooking.departureDate" placeholder="yyyy-MM-dd" min="2018-01-01" 
-                        required />
+                <input type="date" id="departureDate" name="input" ng-model="books.newBooking.departureDate" placeholder="yyyy-MM-dd" min="2018-01-01"
+                    required />
                 <label for="notes">Notes:</label>
-                <input class="text-box" type="textarea" placeholder="" ng-model="books.newBooking.notes">
+                <textarea class="text-box" type="text" placeholder="" ng-model="books.newBooking.notes"></textarea>
                 <button type="submit" class="add_button" value="+">Submit</button>
             </form>
+        </div>
+
+        <div class="container">
+            <h1>Bookings</h1>
+            <div ng-repeat="book in books.all">
+                <form id="bookingform" editable-form name="editableForm" onaftersave="books.editBooking(book)">
+                    <span class="bookingcell" editable-text="book.firstName" e-name="firstName" e-required>{{book.firstName}}</span>
+                    <span class="bookingcell" editable-text="book.lastName" e-name="lastName" e-required>{{book.lastName}}</span>
+                    <span class="bookingcell" editable-email="book.email" e-name="email">{{book.email|| '' }}</span>
+                    <span class="bookingcell" editable-uidate="book.arrivalDate">{{ (book.arrivalDate | date:"dd/MM/yyyy") || 'empty' }}</span>
+                    <span class="bookingcell" editable-uidate="book.departureDate">{{ (book.departureDate | date:"dd/MM/yyyy") || 'empty' }}</span>
+                    <div class="bookingcell">
+                        <!-- button to show form -->
+                        <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                            Edit
+                        </button>
+                        <!-- buttons to submit / cancel form -->
+                        <span ng-show="editableForm.$visible">
+                            <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                                Save
+                            </button>
+                            <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                                Cancel
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
         </div>
 
     </section>
@@ -88,15 +97,16 @@
         </div>
     </section> -->
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <!-- <script src="/lib/angular.js"></script> -->
-    <script src="/lib/bootstrap.js"></script>
-    <script src="/lib/xeditable.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="/js/controllers/todos_controller.js"></script>
-    <script src="/js/controllers/bookings_controller.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/lib/angular.js"></script>
+    <script type="text/javascript" src="/lib/xeditable.js"></script>
+    <script type="text/javascript" src="/lib/jquery.js"></script>
+    <script type="text/javascript" src="/lib/jquery-ui.js"></script>
+    <script type="text/javascript" src="/lib/date.js"></script>
+
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/controllers/todos_controller.js"></script>
+    <script type="text/javascript" src="/js/controllers/bookings_controller.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 
 </body>
 

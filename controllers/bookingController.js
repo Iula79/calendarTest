@@ -35,4 +35,17 @@ var express = require('express'),
             }
         });
     });
+    app.put('/bookings/:id', function(req, res) {
+        console.log("here")
+        console.log(req.body)
+       Booking.findOneAndUpdate({
+         _id: req.params.id
+       }, {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+     }, function(err, booking) {
+         res.send(booking);
+       });
+     })
 module.exports = app;
