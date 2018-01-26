@@ -7,7 +7,8 @@ var express = require('express'),
     bcrypt = require('bcrypt'),
     request = require('request'),
     app = express();
-    todoContr = require('./controllers/todosController')
+    todoContr = require('./controllers/todosController');
+    bookingContr = require('./controllers/bookingController');
 
 app.use(logger('dev'));
 app.use(express.static('./public'));
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use('/', todoContr)
+app.use('/book', bookingContr)
 // app.use(session({
 //     secret: "string",
 //     saveUninitialized: false,
