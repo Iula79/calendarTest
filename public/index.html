@@ -14,32 +14,79 @@
 </head>
 
 <body>
-    <section id="signup" class="login">
-    </section>
-
-    <section id="todo" ng-controller="TodosCtrl as todos">
-    <div class="container">
-        <div class="" ng-if="todos.all.length">
-            <h1>Have you done it?</h1></div>
+    <section id="booking" ng-controller="BookingCtrl as books">
+        <div class="container">
+            <!-- <div class="" ng-if="todos.all.length">
+                <h1>Have you done it?</h1>
+            </div>
             <div class="" ng-if="! todos.all.length">
-            <h3>Good Job!</h3></div>
-        <ul>
-            <li ng-repeat="todo in todos.all">
-                <span editable-text="todo.text" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="todos.editTodo(todo)">{{todo.text|| 'empty' }}</span>
-                <button class="del_button" ng-click="todos.deleteTodo(todo)" ng-hide="textBtnForm.$visible">x</button>
-                <button class="edit_button" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">edit</button>
-            </li>
-        </ul>
+                <h3>Good Job!</h3>
+            </div> -->
+            <h1>Bookings</h1>
+            <ul>
+                <li ng-repeat="book in books.all">
+                    <span editable-text="book.firstName" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="books.editBooking(book)">{{book.firstName|| 'empty' }}</span>
+                    <span editable-text="book.lastName" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="books.editBooking(book)">{{book.lastName|| 'empty' }}</span>
+                    
+                    
+                    <button class="del_button" ng-click="books.deleteBook(book)" ng-hide="textBtnForm.$visible">x</button>
+                    <button class="edit_button" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">edit</button>
+                </li>
+            </ul>
         </div>
         <div class="comma"></div>
         <div class="add_form">
-        <form class="add-todo" ng-submit="todos.addTodo()">
-            <!-- when I hit submit it runs the function add todo the model takes the value in the text box and assigns it to the key text in the newTodo object that I created previously -->
-            <input class="text-box" type="text" placeholder="I need to..." ng-model="todos.newTodo.text">
-            <button type="submit" class="add_button" value="+">+</button>
-        </form>
+            <form class="add-todo" ng-submit="books.addBooking()">
+                <!-- when I hit submit it runs the function add todo the model takes the value in the text box and assigns it to the key text in the newTodo object that I created previously  -->
+                <label for="firstName">First Name:</label>
+                <input class="text-box" type="text" placeholder="" ng-model="books.newBooking.firstName" required>
+                <label for="lastName">Last Name:</label>
+                <input class="text-box" type="text" placeholder="" ng-model="books.newBooking.lastName" required>
+                <label for="email">Email:</label>
+                <input class="text-box" type="email" placeholder="johndoe@gmail.com" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" ng-model="books.newBooking.email">
+                <label for="telephone">Phone:</label>
+                <input class="text-box" type="text" placeholder="+00 000-000-0000" ng-model="books.newBooking.telephone">
+                <label for="guests">Guests:</label>
+                <input class="text-box" type="number" max="10" placeholder="0" ng-model="books.newBooking.guests" required>
+                <label for="arrivalDate">Arrival Date:</label>
+                <input type="date" id="arrivalDate" name="input" ng-model="books.newBooking.arrivalDate" placeholder="yyyy-MM-dd" min="2018-01-01" 
+                        required />
+                <label for="departureDate">Departure Date:</label>
+                <input type="date" id="departureDate" name="input" ng-model="books.newBooking.departureDate" placeholder="yyyy-MM-dd" min="2018-01-01" 
+                        required />
+                <label for="notes">Notes:</label>
+                <input class="text-box" type="textarea" placeholder="" ng-model="books.newBooking.notes">
+                <button type="submit" class="add_button" value="+">Submit</button>
+            </form>
         </div>
+
     </section>
+
+    <!-- <section id="todo" ng-controller="TodosCtrl as todos">
+        <div class="container">
+            <div class="" ng-if="todos.all.length">
+                <h1>Have you done it?</h1>
+            </div>
+            <div class="" ng-if="! todos.all.length">
+                <h3>Good Job!</h3>
+            </div>
+            <ul>
+                <li ng-repeat="todo in todos.all">
+                    <span editable-text="todo.text" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="todos.editTodo(todo)">{{todo.text|| 'empty' }}</span>
+                    <button class="del_button" ng-click="todos.deleteTodo(todo)" ng-hide="textBtnForm.$visible">x</button>
+                    <button class="edit_button" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">edit</button>
+                </li>
+            </ul>
+        </div>
+        <div class="comma"></div>
+        <div class="add_form">
+            <form class="add-todo" ng-submit="todos.addTodo()">
+                 when I hit submit it runs the function add todo the model takes the value in the text box and assigns it to the key text in the newTodo object that I created previously 
+                <input class="text-box" type="text" placeholder="I need to..." ng-model="todos.newTodo.text">
+                <button type="submit" class="add_button" value="+">+</button>
+            </form>
+        </div>
+    </section> -->
 
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
@@ -48,6 +95,7 @@
     <script src="/lib/xeditable.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/controllers/todos_controller.js"></script>
+    <script src="/js/controllers/bookings_controller.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 
 </body>

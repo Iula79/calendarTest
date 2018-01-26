@@ -61,9 +61,8 @@ h3 {
 }
 .add_form {
     position: absolute;
-    left: 25%;
     top: 75%;
-    text-align: center;
+    display: inline-block;
 }
 button {
     font-family: 'Bangers', cursive;

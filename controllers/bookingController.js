@@ -22,5 +22,17 @@ var express = require('express'),
             }
         });
     })
-
+    app.delete('/bookings/:id', function(req, res) {
+        Booking.remove({
+            //checking if the id of the route is the same of the id of the todo
+            _id: req.params.id
+        }, function(err, booking) {
+            if (err) {
+                res.send(err)
+            } else {
+                //send the todo back to the controller
+                res.send(booking)
+            }
+        });
+    });
 module.exports = app;

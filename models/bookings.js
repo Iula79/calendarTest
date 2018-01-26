@@ -7,8 +7,9 @@ var BookingSchema = mongoose.Schema({
   arrivalDate: { type: Date},
   departureDate: { type: Date},
   insertionDate: {type: Date, default: Date.now},
+  guests: Number,
   notes:String,
-  archived: Boolean
+  archived:  {type: Boolean, default: false}
 });
 
 var Booking = mongoose.model('Booking', BookingSchema);
