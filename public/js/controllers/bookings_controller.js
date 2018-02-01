@@ -1,6 +1,6 @@
-meanApp.controller('BookingCtrl', ['$http', '$log', bookingCtrl]);
+meanApp.controller('BookingCtrl', ['$http', '$log', '$scope',  bookingCtrl]);
 
-function bookingCtrl($http, $log) {
+function bookingCtrl($http, $log, $scope) {
     $log.info("Inside the bookings controller");
 
     var self = this;
@@ -10,9 +10,10 @@ function bookingCtrl($http, $log) {
     self.addBooking = addBooking;
     self.deleteBooking = deleteBooking;
     self.editBooking = editBooking;
-    console.log(self.newBooking)
+    // self.checkValue = checkValue
+    
     getBookings();
-
+    
     //function that shows all the Bookings
     function getBookings() {
         $http({
@@ -22,7 +23,23 @@ function bookingCtrl($http, $log) {
             url: '/book/bookings'
         }).then(function(res) {
             //saving
-            self.all = res.data;
+            var myVar = res.data
+            myVar.map(function(el) {
+                // console.log(el)
+                Object.keys(el).map(function(key,index){
+                        if (key=== "arrivalDate"|| key=== "departureDate"){
+                             el[key]= new Date(el[key])
+                        }else 
+                        {el[key]= el[key]}
+                         
+                })
+                // console.log(el)
+                // return res.data[key]["arrivalDate"]= 
+                //     new Date(res.data[key]["arrivalDate"])     
+            });
+            // console.log(myVar)
+            self.all = res.data
+            console.log(self.all)
         }, function(err) {
             console.log(err);
         });

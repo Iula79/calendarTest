@@ -43,7 +43,10 @@ var express = require('express'),
        }, {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        email: req.body.email
+        email: req.body.email,
+        arrivalDate: req.body.arrivalDate,
+        departureDate:req.body.departureDate,
+        archived:req.body.archived
      }, function(err, booking) {
          res.send(booking);
        });

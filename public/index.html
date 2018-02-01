@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <script type="text/javascript" src="/lib/angular.js"></script>
     <link rel="stylesheet" href="/css/angular-csp.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/lib/xeditable.css" />
-    <link rel="stylesheet" href="/lib/jquery-ui.css" />
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.1/ui-bootstrap-tpls.min.js"></script> -->
+
+    <!-- <link rel="stylesheet" href="/lib/jquery-ui.css" /> -->
+    
 </head>
 
 <body>
@@ -28,7 +32,7 @@
                 <label for="telephone">Phone:</label>
                 <input class="text-box" type="text" placeholder="+00 000-000-0000" ng-model="books.newBooking.telephone">
                 <label for="guests">Guests:</label>
-                <input class="text-box" type="number" max="10" placeholder="0" ng-model="books.newBooking.guests" required>
+                <input class="text-box" type="number" min="0" max="10" placeholder="0" ng-model="books.newBooking.guests" required>
                 <label for="arrivalDate">Arrival Date:</label>
                 <input type="date" id="arrivalDate" name="input" ng-model="books.newBooking.arrivalDate" placeholder="yyyy-MM-dd" min="2018-01-01"
                     required />
@@ -40,16 +44,23 @@
                 <button type="submit" class="add_button" value="+">Submit</button>
             </form>
         </div>
-
+        
         <div class="container">
             <h1>Bookings</h1>
-            <div ng-repeat="book in books.all">
+            <input type="checkbox" > <p style="display: inline;">Select All</p>
+            <div ng-repeat="book in books.all" class="repeat">
+                <input type="checkbox" ng-show="!editableForm.$visible">
                 <form id="bookingform" editable-form name="editableForm" onaftersave="books.editBooking(book)">
+                    <!-- <a href="#" editable-checkbox="book.archived" e-title="Archived?">
+                                {{ book.archived && "Archived!" || "Not Archived" }}
+                    </a> -->
+                    
                     <span class="bookingcell" editable-text="book.firstName" e-name="firstName" e-required>{{book.firstName}}</span>
                     <span class="bookingcell" editable-text="book.lastName" e-name="lastName" e-required>{{book.lastName}}</span>
                     <span class="bookingcell" editable-email="book.email" e-name="email">{{book.email|| '' }}</span>
-                    <span class="bookingcell" editable-uidate="book.arrivalDate">{{ (book.arrivalDate | date:"dd/MM/yyyy") || 'empty' }}</span>
-                    <span class="bookingcell" editable-uidate="book.departureDate">{{ (book.departureDate | date:"dd/MM/yyyy") || 'empty' }}</span>
+                    <span class="bookingcell" editable-date="book.arrivalDate" onbeforesave="books.checkValue()">{{ (book.arrivalDate | date:"dd/MM/yyyy") || 'empty' }}</span>
+                    <span class="bookingcell" editable-date="book.departureDate" onbeforesave="books.checkValue()">{{ (book.departureDate | date:"dd/MM/yyyy") || 'empty' }}</span>
+                    
                     <div class="bookingcell">
                         <!-- button to show form -->
                         <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
@@ -65,43 +76,22 @@
                             </button>
                         </span>
                     </div>
+
                 </form>
+                <button type="submit" class="btn btn-default" ng-click="books.deleteBooking(book)" ng-show="!editableForm.$visible">
+                        Delete
+                </button>
             </div>
         </div>
 
     </section>
 
-    <!-- <section id="todo" ng-controller="TodosCtrl as todos">
-        <div class="container">
-            <div class="" ng-if="todos.all.length">
-                <h1>Have you done it?</h1>
-            </div>
-            <div class="" ng-if="! todos.all.length">
-                <h3>Good Job!</h3>
-            </div>
-            <ul>
-                <li ng-repeat="todo in todos.all">
-                    <span editable-text="todo.text" e-form="textBtnForm" ng-hide="textBtnForm.$visible" onaftersave="todos.editTodo(todo)">{{todo.text|| 'empty' }}</span>
-                    <button class="del_button" ng-click="todos.deleteTodo(todo)" ng-hide="textBtnForm.$visible">x</button>
-                    <button class="edit_button" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">edit</button>
-                </li>
-            </ul>
-        </div>
-        <div class="comma"></div>
-        <div class="add_form">
-            <form class="add-todo" ng-submit="todos.addTodo()">
-                 when I hit submit it runs the function add todo the model takes the value in the text box and assigns it to the key text in the newTodo object that I created previously 
-                <input class="text-box" type="text" placeholder="I need to..." ng-model="todos.newTodo.text">
-                <button type="submit" class="add_button" value="+">+</button>
-            </form>
-        </div>
-    </section> -->
 
-    <script type="text/javascript" src="/lib/angular.js"></script>
-    <script type="text/javascript" src="/lib/xeditable.js"></script>
+
     <script type="text/javascript" src="/lib/jquery.js"></script>
     <script type="text/javascript" src="/lib/jquery-ui.js"></script>
     <script type="text/javascript" src="/lib/date.js"></script>
+    <script type="text/javascript" src="/lib/xeditable.js"></script>
 
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/controllers/todos_controller.js"></script>

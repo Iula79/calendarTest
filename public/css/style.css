@@ -1,10 +1,10 @@
 #bookingform{
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns:  1fr 1fr 2fr 1fr 1fr 2fr ;
     
 }
 .bookingcell {
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
     margin-bottom:1px;
     padding:5px;
 }
@@ -12,29 +12,9 @@
     display:grid;
     grid-template-columns: 100px 200px;
 }
-/* body {
-   
-
+.repeat{
+    display: grid;
+    grid-template-columns:auto auto auto;
 }
 
-.container {
- 
-}
-h1 {
-
-}
-h3 {
-    
-} 
-.text-box {
-   
-}
-input {
-    
-}
-
-.comma {
-   
-}
-*/
 
