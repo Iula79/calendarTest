@@ -47,8 +47,9 @@
         
         <div class="container">
             <h1>Bookings</h1>
-            <input type="checkbox" > <p style="display: inline;">Select All</p>
-            <div ng-repeat="book in books.all" class="repeat">
+            <input type="checkbox" ng-model="books.selected" > <p style="display: inline;">Select All</p>
+            <tt>selected = {{books.selected}}</tt><br/>
+            <div ng-repeat="book in books.all"  class="repeat">
                 <input type="checkbox" ng-show="!editableForm.$visible">
                 <form id="bookingform" editable-form name="editableForm" onaftersave="books.editBooking(book)">
                     <!-- <a href="#" editable-checkbox="book.archived" e-title="Archived?">
@@ -94,7 +95,6 @@
     <script type="text/javascript" src="/lib/xeditable.js"></script>
 
     <script type="text/javascript" src="/js/app.js"></script>
-    <script type="text/javascript" src="/js/controllers/todos_controller.js"></script>
     <script type="text/javascript" src="/js/controllers/bookings_controller.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 

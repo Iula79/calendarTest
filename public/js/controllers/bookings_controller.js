@@ -10,8 +10,8 @@ function bookingCtrl($http, $log, $scope) {
     self.addBooking = addBooking;
     self.deleteBooking = deleteBooking;
     self.editBooking = editBooking;
-    // self.checkValue = checkValue
-    
+    self.selected = false;
+    console.log(self.selected)
     getBookings();
     
     //function that shows all the Bookings
