@@ -1,4 +1,4 @@
-meanApp.controller('BookingCtrl', ['$http', '$log', '$scope',  bookingCtrl]);
+meanApp.controller('BookingCtrl', ['$http', '$log', '$scope', bookingCtrl]);
 
 function bookingCtrl($http, $log, $scope) {
     $log.info("Inside the bookings controller");
@@ -10,10 +10,45 @@ function bookingCtrl($http, $log, $scope) {
     self.addBooking = addBooking;
     self.deleteBooking = deleteBooking;
     self.editBooking = editBooking;
-    self.selected = false;
-    console.log(self.selected)
+    self.selectedAll = false;
+    self.selected = {}
+    self.selectAllBookings = selectAllBookings;
+    $scope.eventSource = {
+        url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+        className: 'gcal-event',           // an option!
+        currentTimezone: 'America/Chicago' // an option!
+    };
+    $scope.uiConfig = {
+        calendar: {
+            height: 450,
+            editable: true,
+            header: {
+                left: 'month basicWeek basicDay agendaWeek agendaDay',
+                center: 'title',
+                right: 'today prev,next'
+            },
+            eventClick: $scope.alertEventOnClick,
+            eventDrop: $scope.alertOnDrop,
+            eventResize: $scope.alertOnResize
+        }
+    };
+
+    console.log(self.selectedAll)
     getBookings();
-    
+
+    function selectAllBookings() {
+        if (self.selectedAll) {
+            self.all.map(function (el) {
+                console.log(typeof el._id)
+                self.selected[el._id] = true;
+            });
+        } else {
+            self.selected = {}
+        }
+        console.log(self.selected)
+    }
+
+
     //function that shows all the Bookings
     function getBookings() {
         $http({
@@ -21,17 +56,16 @@ function bookingCtrl($http, $log, $scope) {
             //the request then goes to the server
             method: 'GET',
             url: '/book/bookings'
-        }).then(function(res) {
+        }).then(function (res) {
             //saving
             var myVar = res.data
-            myVar.map(function(el) {
+            myVar.map(function (el) {
                 // console.log(el)
-                Object.keys(el).map(function(key,index){
-                        if (key=== "arrivalDate"|| key=== "departureDate"){
-                             el[key]= new Date(el[key])
-                        }else 
-                        {el[key]= el[key]}
-                         
+                Object.keys(el).map(function (key, index) {
+                    if (key === "arrivalDate" || key === "departureDate") {
+                        el[key] = new Date(el[key])
+                    } else { el[key] = el[key] }
+
                 })
                 // console.log(el)
                 // return res.data[key]["arrivalDate"]= 
@@ -40,7 +74,7 @@ function bookingCtrl($http, $log, $scope) {
             // console.log(myVar)
             self.all = res.data
             console.log(self.all)
-        }, function(err) {
+        }, function (err) {
             console.log(err);
         });
     }
@@ -53,10 +87,10 @@ function bookingCtrl($http, $log, $scope) {
             url: '/book/bookings',
             //takes the data that comes in and saves it in the object newBooking
             data: self.newBooking
-        }).then(function(res) {
+        }).then(function (res) {
             getBookings();
             $log.info(res.data);
-        }, function(err) {
+        }, function (err) {
             console.log(err);
         });
         self.newBooking = {};
@@ -69,11 +103,11 @@ function bookingCtrl($http, $log, $scope) {
             method: 'DELETE',
             url: '/book/bookings/' + booking._id,
             data: self.newBooking
-        }).then(function(res) {
+        }).then(function (res) {
             //running this function to update the list
             getBookings();
             $log.log(self);
-        }, function(err) {
+        }, function (err) {
             console.log(err);
 
         });
@@ -87,13 +121,13 @@ function bookingCtrl($http, $log, $scope) {
             method: 'PUT',
             url: '/book/bookings/' + booking._id,
             data: booking
-        }).then(function(res) {
+        }).then(function (res) {
             console.log(res)
             getBookings();
-        }, function(err) {
+        }, function (err) {
             console.log(err);
         });
 
     }
-    
+
 }
